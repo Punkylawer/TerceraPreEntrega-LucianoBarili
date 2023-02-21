@@ -90,7 +90,7 @@ let cantidadCuotas;
                                 prestamoElegido = prestamoC;                 
                                 if(cantidadCuotas == 1) {
                                     cantidadCuotas = cuotasA;
-                                    funcionCalculoCuotas = calculoCuotas(prestamoElegido,cantidadCuotas).mathRound(funcionCalculoCuotas);
+                                    funcionCalculoCuotas = calculoCuotas(prestamoElegido,cantidadCuotas);
                                     alert('Por el préstamo y cuotas elegidas, UD debera pagar por mes la suma de ' + funcionCalculoCuotas + 'USD')
                                     break;
                                 }
@@ -159,7 +159,4 @@ function limpiar() {
     document.getElementById("inputTres").value="";
 }
 
-function colorBoton() {
-    document.getElementById('botonDale').style.backgroundColor="green";
-}
 
