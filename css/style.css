@@ -84,6 +84,15 @@ margin: 20px;
     text-align: center;
 }
 
+/* Seccion Formulario */
+
+h3 {
+    font-size: 32px; /* Tamaño de fuente personalizado */
+    margin-top: 50px; /* Margen superior personalizado */
+    margin-bottom: 30px; /* Margen inferior personalizado */
+    padding: 0 15px; /* Padding personalizado */
+}
+
 /* seccion JS */
 
 .class-js {

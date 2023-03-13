@@ -18,13 +18,13 @@
 <body>
 
 <!-- Barra de navegación -->
-<nav class="navbar navbar-expand-md navbar-light navbar-right">
-    <div class="container-fluid">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid ml-auto">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbar-toggler">
-            <ul class="navbar-nav d-flex justify-content-center align-items-center">
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#">Préstamos</a>
                 </li>
@@ -42,40 +42,66 @@
     </div>
 </nav>
 
+
 <!-- Sección principal -->
 <section class="hero aling-items-stretch">
     <div class="hero-principal d-flex flex-column justify-content-center align-items-center">
+        <h1>PRESTA S.A</h1>
         <img class="hero-imagen-desarrollador rounded-circle" src="imagenes/foto1.jpg" alt="Foto de portada">
-        <h1>Lo nuestro es crear soluciones.</h1>
-        <h2>Nos caracterizamos por brindar un servicio personalizado. Nuestro objetivo es acompañar sus proyectos y mantener relaciones sólidas de largo plazo.</h2>
+        <h2>Nuestro objetivo es brindar un servicio personalizado, viabilizando el acompañamiento en sus proyectos y el mantenimiento de relaciones sólidas a largo plazo.</h2>
     </div>
 </section>
 
 <!-- Sección sobre mi -->
 <section class="sobre-mi seccion-oscura">
-    <div class="contenedor">
-        <h2 class="seccion-titulo">Te contamos un poquito sobre nosotros</h2>
-        <p class="seccion-texto">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque fermentum odio eu nisl condimentum aliquet. Sed ut est tellus. Nunc at vehicula neque. Nam gravida metus quis tellus feugiat, vel vestibulum nulla laoreet. Suspendisse quis dapibus nisi. Phasellus ut nulla euismod, vulputate ligula in, finibus nisi. Aliquam consectetur, nunc in cursus lobortis, velit sem pellentesque neque, eget viverra ante tortor at arcu. Sed eget sapien ex. Donec congue arcu leo, non gravida ipsum varius non. Vivamus eu ullamcorper risus.</p>
+    <div class="container-fluid">
+        <h2 class="seccion-titulo text-center">Te contamos un poquito sobre nosotros</h2>
+        <p class="seccion-texto text-center">Sabemos muy bien que cuando uno está comenzando un negocio, la posibilidad de acceder a financiación crediticia muchas veces sella la suerte del emprendimiento. No desconociendo la importancia que las empresas
+            tienen en el crecimiento de la economía del País en el que habitamos, y del mundo, los cuatro accionistas fundadores de Presta SA hemos coincidido al momento de crear nuestra empresa, que sería excelente poder aportar nuestro granito
+            de arena, mediante el otorgamiento de prestamos a aquellos que estuvieren por emprender un negocio y que necesitaren una ayuda a tales fines. Así nació nuestra empresa, que hoy en día, se especializa en la ayuda a las Pymes de nuestro País,
+            siendo estas la que constituyen el 98% del total de las empresas que actualmente tienen giro diario en la Argentina.</p>
     </div>
 </section>
 
-<!-- Sección PRIMERA PRE-ENTREGA JS -->
-<section class="seccion-js">
-<div class="clase-js text-align-center">
-    <h2>PRIMERA PRE ENTREGA</h2>
-    <h2 class="mt-3 mb-2">Promedio de edad de nuestros clientes</h2>
-    <div class="mt-2 mb-5">
-        <p> Mirá, ¿Querés calcular el promedio de edad de nuestros clientes?</p>
-        <p> Hacelo acá abajo.</p>
+<section>
+    <div class="container">
+        <div class="col-md-6 mx-auto mb-5">
+            <h3 class="text-center my-4">Completa tus datos para acceder a nuestros préstamos</h3> <!-- Agregamos la clase "text-center" para alinear el título al centro y la clase "my-4" para añadir margen superior e inferior -->
+            <form>
+                <div class="form-group">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="apellido">Apellido:</label>
+                    <input type="text" class="form-control" id="apellido" name="apellido" required>
+                </div>
+                <div class="form-group">
+                    <label for="edad">Edad:</label>
+                    <input type="number" class="form-control" id="edad" name="edad" required>
+                </div>
+                <div class="form-group">
+                    <label for="telefono">Teléfono:</label>
+                    <input type="tel" class="form-control" id="telefono" name="telefono" required>
+                </div>
+                <div class="form-group">
+                    <label for="correo">Correo electrónico:</label>
+                    <input type="email" class="form-control" id="correo" name="correo" required>
+                </div>
+                <div class="form-group"> <!-- Agregamos un nuevo input para la descripción del proyecto -->
+                    <label for="proyecto">¿Cuál es el proyecto al que ayudará nuestro préstamo?</label>
+                    <input type="text" class="form-control" id="proyecto" name="proyecto" required>
+                </div>
+                <button type="submit" class="btn btn-primary mb-3">Enviar</button> <!-- Agregamos la clase "mb-3" para añadir margen inferior y un nuevo botón con la funcionalidad que se desea -->
+                <div id="prestamos" style="display: none;">
+                    <a href="#" class="btn btn-success">Ir a los préstamos</a>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
-<div>
-    <input type="number" id="inputUno"> 
-    <input type="text" id="inputTres" readonly>
-    <button onclick="registrarEdades(inputUno.value)" id="botonDale">Dale click</button>
-    <button onclick="limpiar()" id="botonLimpiar">Limpiar resultados</button>
-</div>
 </section>
+
+
 
 <!-- Footer -->
 <footer class="text-center text-lg-start mt-4 footer" style="background-color: #f7f2ef;">
@@ -131,8 +157,9 @@
     </div>
 </footer>
 
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>
-
 </html>
