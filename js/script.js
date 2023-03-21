@@ -11,10 +11,10 @@
     Luego cree otra función que es la que ejecuta todo, validando edad, ejecutando la iteracion de eleccion de prestamo, y
     calculando cual es el valor de la cuota que tiene que devolver el tomador del prestamo para su cancelacion
 
-    
+    Si el usuario completa los datos del formulario HTML automaticamente le permite ingresar nuevamente la edad y elegir prestamo.
 
 
-*/
+
 
 const prestamos = [
   { nombre: "Plan 0", capital: 500000,cuotas: 6, interes: 0.10 },
@@ -55,38 +55,52 @@ function solicitarPrestamo() {
 }
 
 solicitarPrestamo()
+*/
+
+let formu = document.getElementById('formulario');
+
+document.addEventListener('submit', funcionEnviar);
+
+function funcionEnviar(event) {
+  event.preventDefault();
+  let nombre = document.getElementById('nombre').value;
+  let apellido = document.getElementById('apellido').value;
+  let edad = document.getElementById('edad').value;
+  let telefono = document.getElementById('telefono').value;
+  let correo = document.getElementById('correo').value;
+  let proyecto = document.getElementById('proyecto').value;
+  
+  let objetoFormulario = {
+    nombre,
+    apellido,
+    edad,
+    telefono,
+    correo,
+    proyecto,
+  }
+  console.log(objetoFormulario);
+  localStorage.setItem('formulario', JSON.stringify(objetoFormulario))
+  
+  // Agregar JSON.parse y console.log para verificar stringify y parse
+  let datosAlmacenados = JSON.parse(localStorage.getItem('formulario'));
+  console.log(datosAlmacenados);
+
+}
+
 
 /*
 
-
-/* Segunda Pre-entrrega - Segundo ejercicio 
-
-Una vez finalizado el ejercicio con los prompts y alerts, ya en la página de la empresa, dejé una sección
-donde el usuario consulte el promedio de edad de los clientes.
-
-Se ingresan los valores en el primer input, y, en el segundo van apareciendo el promedio resultante de los números
-ingresados.
-
+a)
+Tengo que guardar el objetoFormulario, para guardar los datos ingresados por los usuarios, 
+cada uno en un objetoFormulario
+b)
+Tengo que crear una funcion que inserte un html en el html original mediante el cual luego del evento Submit 
+del formulario, aparezca al lado de enviar un nuevo boton que sea "ir a los préstamos"
+c) agregar funciones a cada input con estructura if para validar y limitar ciertas cuestiones.
+Ejemplo. en edad un if que diga que el numero tecleado tiene que ir entre 1 y 120
+en numero de telefono, agregar el pre fijo local de alguna manera 
+en correo electronico solicitar el arroba
 
 */
 
-let diferentesEdades = [];
 
-function registrarEdades(a) {
-    if(a) {
-        let resultado =parseInt(0);
-        diferentesEdades.push(a);
-        for (let i = 0; i < diferentesEdades.length; i++) {
-            resultado = resultado + parseInt(diferentesEdades[i]) ;
-        }
-        document.getElementById("inputTres").value=resultado/diferentesEdades.length;
-        document.getElementById("inputUno").value="";
-    } else {
-        alert('Este campo no puede quedar vacio, es obligatorio ingresar una edad');
-    }
-}
-
-function limpiar() {
-    diferentesEdades = [];
-    document.getElementById("inputTres").value="";
-}
