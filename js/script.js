@@ -13,7 +13,7 @@
 
     Si el usuario completa los datos del formulario HTML automaticamente le permite ingresar nuevamente la edad y elegir prestamo.
 
-
+*/
 
 
 const prestamos = [
@@ -30,33 +30,25 @@ const prestamos = [
 
 
 
-function eleccionPrestamo() {
-  let planes = "";
-  prestamos.forEach(function(currentElement,  index) { 
-  planes = planes + "\n Plan " + index + " :  con un Capital de $" + currentElement.capital + " y "+ currentElement.cuotas + " cuotas de financiación." 
-})
-
-  let prestamoAElegir = parseInt(prompt("Por favor, elija el préstamo al que quiera acceder: " + planes));
-  return prestamoAElegir;
-}
-
-
+/*
 function solicitarPrestamo() {
-  let edadUsuario = parseInt(prompt('Ingrese su edad. Recuerde que para acceder a nuestros préstamos debe ser mayor a 18 años.'));
-  if(edadUsuario < 18) {
-    alert('La edad ingresada no lo habilita a acceder a nuestros préstamos');
-  } else {
     let prestamoAElegir = eleccionPrestamo();
     let prestamoSeleccionado = prestamos[prestamoAElegir];
     let resultado = Math.round(prestamoSeleccionado.capital / prestamoSeleccionado.cuotas + prestamoSeleccionado.capital * prestamoSeleccionado.interes);
-    alert(`El valor mensual de la cuota para la devolución del préstamo que has solicitado, asciende a la suma de $  ${resultado}.`)
     return resultado;
   }
-}
+
 
 solicitarPrestamo()
-*/
+*/ 
 
+/* Array PRESTAMOS guardo en localStorage */
+
+localStorage.setItem('prestamos', JSON.stringify(prestamos));
+
+
+/* Aplico DOM, EVENTOS, LOCALSTORAGE Y JSON  
+Creo un objeto que guarda los datos ingresados por el usuario en el FORMULARIO que está en la página principal */
 let formu = document.getElementById('formulario');
 
 document.addEventListener('submit', funcionEnviar);
@@ -78,12 +70,41 @@ function funcionEnviar(event) {
     correo,
     proyecto,
   }
-  console.log(objetoFormulario);
-  localStorage.setItem('formulario', JSON.stringify(objetoFormulario))
   
-  // Agregar JSON.parse y console.log para verificar stringify y parse
+
+  // Almaceno todo en localStorage. Agregar JSON.parse y console.log para verificar stringify y parse
+  localStorage.setItem('formulario', JSON.stringify(objetoFormulario))
   let datosAlmacenados = JSON.parse(localStorage.getItem('formulario'));
-  console.log(datosAlmacenados);
+  
+
+  /* Una vez cargados los datos por el usuario, se remueve el formulario */
+  document.getElementById('formulario').remove();
+  document.getElementById('textoRemove').remove();
+  
+  /* Creo dos elementos. Un elemento P y un Button. Le agrego clases. */
+
+  const newBtn = document.createElement('button');
+  newBtn.classList.add('btn');
+  newBtn.classList.add('btn-primary');
+  newBtn.classList.add('mb-3');
+  newBtn.classList.add('text-center');
+  const newText = document.createElement('p');
+  newText.classList.add('text-center');
+  newText.classList.add('nuevo-texto');
+  newBtn.textContent = 'Ver nuestros préstamos';
+  newText.textContent = 'Bienvenido, a continuación podrás acceder a nuestros planes: ';
+
+  /* Agrego un evento. Una vez que se le da click a "enviar", desaprece el formulario.
+    Aparece un texto y un botón que te lleva a la pagina de prestamos */
+
+  newBtn.addEventListener('click', function handleClick(event) {
+    location.href='paginas/prestamos.html';
+  })
+  const cajita = document.createElement('div')
+  cajita.classList.add('divCajita');
+  cajita.appendChild(newText)
+  cajita.appendChild(newBtn);
+  document.getElementById('nuevoID').appendChild(cajita);
 
 }
 
@@ -92,7 +113,7 @@ function funcionEnviar(event) {
 
 a)
 Tengo que guardar el objetoFormulario, para guardar los datos ingresados por los usuarios, 
-cada uno en un objetoFormulario
+cada uno en un objetoFormulario. OK
 b)
 Tengo que crear una funcion que inserte un html en el html original mediante el cual luego del evento Submit 
 del formulario, aparezca al lado de enviar un nuevo boton que sea "ir a los préstamos"

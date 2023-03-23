@@ -65,8 +65,8 @@
 
 <section>
     <div class="container">
-        <div class="col-md-6 mx-auto mb-5">
-            <h3 class="text-center my-4">Completa tus datos para acceder a nuestros préstamos</h3> <!-- Agregamos la clase "text-center" para alinear el título al centro y la clase "my-4" para añadir margen superior e inferior -->
+        <div class="col-md-6 mx-auto mb-5" id="nuevoID">
+            <h3 class="text-center my-4" id="textoRemove">Completa tus datos para acceder a nuestros préstamos</h3> <!-- Agregamos la clase "text-center" para alinear el título al centro y la clase "my-4" para añadir margen superior e inferior -->
             <form id="formulario">
                 <div class="form-group">
                     <label for="nombre">Nombre:</label>
@@ -93,9 +93,6 @@
                     <input type="text" class="form-control" id="proyecto" name="proyecto" required>
                 </div>
                 <button type="submit" class="btn btn-primary mb-3">Enviar</button> 
-                <div id="prestamos" style="display: none;">
-                    <a href="#" class="btn btn-success">Ir a los préstamos</a>
-                </div>
             </form>
         </div>
     </div>
