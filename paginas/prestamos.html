@@ -17,30 +17,57 @@
     <title>Presta SA - Tu prestamo personal</title>
 </head>
 <body>
+
+    <!-- Barra de navegación -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid ml-auto">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Préstamos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Nosotros</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Testimonios</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Contacto</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
 <!-- Sección principal -->
-<section class="hero aling-items-stretch">
-    <div class="hero-principal d-flex flex-column justify-content-center align-items-center">
-        <h1>PRESTA S.A</h1>
-        <img class="hero-imagen-desarrollador rounded-circle" src="imagenes/foto1.jpg" alt="Foto de portada">
-        <h2>Nuestro objetivo es brindar un servicio personalizado, viabilizando el acompañamiento en sus proyectos y el mantenimiento de relaciones sólidas a largo plazo.</h2>
+<section class="hero-2 aling-items-stretch">
+    <div class="hero-principal-2 d-flex flex-column justify-content-center align-items-center">
+        <h1 class="prestaH1">PRESTA S.A</h1>
     </div>
 </section>
 
-<!-- Sección sobre mi -->
-<section class="sobre-mi seccion-oscura">
-    <div class="container-fluid">
-        <h2 class="seccion-titulo text-center">Te contamos un poquito sobre nosotros</h2>
-        <p class="seccion-texto text-center">Sabemos muy bien que cuando uno está comenzando un negocio, la posibilidad de acceder a financiación crediticia muchas veces sella la suerte del emprendimiento. No desconociendo la importancia que las empresas
-            tienen en el crecimiento de la economía del País en el que habitamos, y del mundo, los cuatro accionistas fundadores de Presta SA hemos coincidido al momento de crear nuestra empresa, que sería excelente poder aportar nuestro granito
-            de arena, mediante el otorgamiento de prestamos a aquellos que estuvieren por emprender un negocio y que necesitaren una ayuda a tales fines. Así nació nuestra empresa, que hoy en día, se especializa en la ayuda a las Pymes de nuestro País,
-            siendo estas la que constituyen el 98% del total de las empresas que actualmente tienen giro diario en la Argentina.</p>
-    </div>
-</section>
+<!--Seccion de los planes de prestamo y cotizador de prestamos -->
 <section>
     <form id="div1">
-        <div>hola</div>
+        <div> 
+        </div>
+        <aside class="col-sm-4">
+            <h2>Cotizador de préstamos seleccionados: </h2>
+            <!-- Elementos del carrito -->
+            <ul id="carrito" class="list-group"></ul>
+            <hr>
+            <!-- Precio total -->
+            <p class="text-right">Total de capital solicitado: <span id="total"></span>$</p>
+            <p class="text-right">Total de dinero a devolver: <span id="totalDevolucion"></span>$</p>
+            <button id="boton-vaciar" class="btn btn-danger">Vaciar</button>
+        </aside>
     </form>
 </section>
+
 <!-- Footer -->
 <footer class="text-center text-lg-start mt-4 footer" style="background-color: #f7f2ef;">
     <div class="container p-4">

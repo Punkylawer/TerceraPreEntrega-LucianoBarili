@@ -17,27 +17,24 @@
 
 
 const prestamos = [
-  { nombre: "Plan 0", capital: 500000,cuotas: 6, interes: 0.10 },
-  { nombre: "Plan 1", capital: 500000,cuotas: 12, interes: 0.20},
-  { nombre: "Plan 2",capital: 500000,cuotas: 24, interes: 0.30},
-  { nombre: "Plan 3",capital: 1000000,cuotas: 6 , interes: 0.10 },
-  { nombre: "Plan 4",capital: 1000000,cuotas: 12, interes: 0.20 },
-  { nombre: "Plan 5",capital: 1000000,cuotas: 24, interes: 0.30 },
-  { nombre: "Plan 6",capital: 2000000,cuotas: 6, interes: 0.10 },
-  { nombre: "Plan 7",capital: 2000000,cuotas: 12, interes: 0.20 },
-  { nombre: "Plan 8",capital: 2000000,cuotas: 24, interes: 0.30 }
+  { id: 0, nombre: "Plan 0", capital: 500000,cuotas: 6, interes: 0.10 },
+  { id: 1, nombre: "Plan 1", capital: 500000,cuotas: 12, interes: 0.20},
+  { id: 2, nombre: "Plan 2",capital: 500000,cuotas: 24, interes: 0.30},
+  { id: 3, nombre: "Plan 3",capital: 1000000,cuotas: 6 , interes: 0.10 },
+  { id: 4, nombre: "Plan 4",capital: 1000000,cuotas: 12, interes: 0.20 },
+  { id: 5, nombre: "Plan 5",capital: 1000000,cuotas: 24, interes: 0.30 },
+  { id: 6, nombre: "Plan 6",capital: 2000000,cuotas: 6, interes: 0.10 },
+  { id: 7, nombre: "Plan 7",capital: 2000000,cuotas: 12, interes: 0.20 },
+  { id: 8,nombre: "Plan 18",capital: 2000000,cuotas: 24, interes: 0.30 }
 ];
 
 
 
 /*
-function solicitarPrestamo() {
-    let prestamoAElegir = eleccionPrestamo();
-    let prestamoSeleccionado = prestamos[prestamoAElegir];
+function solicitarPrestamo(prestamoSeleccionado) {
     let resultado = Math.round(prestamoSeleccionado.capital / prestamoSeleccionado.cuotas + prestamoSeleccionado.capital * prestamoSeleccionado.interes);
     return resultado;
   }
-
 
 solicitarPrestamo()
 */ 
@@ -107,21 +104,3 @@ function funcionEnviar(event) {
   document.getElementById('nuevoID').appendChild(cajita);
 
 }
-
-
-/*
-
-a)
-Tengo que guardar el objetoFormulario, para guardar los datos ingresados por los usuarios, 
-cada uno en un objetoFormulario. OK
-b)
-Tengo que crear una funcion que inserte un html en el html original mediante el cual luego del evento Submit 
-del formulario, aparezca al lado de enviar un nuevo boton que sea "ir a los préstamos"
-c) agregar funciones a cada input con estructura if para validar y limitar ciertas cuestiones.
-Ejemplo. en edad un if que diga que el numero tecleado tiene que ir entre 1 y 120
-en numero de telefono, agregar el pre fijo local de alguna manera 
-en correo electronico solicitar el arroba
-
-*/
-
-

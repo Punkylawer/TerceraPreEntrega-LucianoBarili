@@ -59,6 +59,12 @@ h1 {
     min-height: 450px;
     text-align: center;
 }
+
+.hero-2 {
+    min-height: 200px;
+    background-color:  #1b1b32;
+    margin-bottom: 2em;
+}
 .hero-principal {
     padding:3rem;
 }
@@ -71,6 +77,11 @@ margin: 20px;
 .hero-principal h2 {
     font-size: 1.5rem;
     color:#615151;
+}
+
+.prestaH1 {
+    color:white;
+    
 }
 
 /* Sobre mi */
@@ -108,4 +119,8 @@ h3 {
 .nuevo-texto {
     font-weight: bold;
     font-size: 1.4rem;
+}
+
+.cajitasPrestamos {
+    margin-bottom: 2rem;
 }
