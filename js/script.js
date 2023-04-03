@@ -13,7 +13,7 @@
 
     Si el usuario completa los datos del formulario HTML automaticamente le permite ingresar nuevamente la edad y elegir prestamo.
 
-*/
+
 
 
 const prestamos = [
@@ -28,7 +28,7 @@ const prestamos = [
   { id: 8,nombre: "Plan 18",capital: 2000000,cuotas: 24, interes: 0.30 }
 ];
 
-
+*/
 
 /*
 function solicitarPrestamo(prestamoSeleccionado) {
@@ -41,7 +41,10 @@ solicitarPrestamo()
 
 /* Array PRESTAMOS guardo en localStorage */
 
-localStorage.setItem('prestamos', JSON.stringify(prestamos));
+
+
+
+//localStorage.setItem('prestamos', JSON.stringify(prestamos));
 
 
 /* Aplico DOM, EVENTOS, LOCALSTORAGE Y JSON  

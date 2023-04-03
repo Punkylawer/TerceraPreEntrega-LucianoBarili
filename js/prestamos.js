@@ -1,12 +1,20 @@
 //Segunda pagina. Pagina de prestamos que se habilita luego de llenar el formulario.
 
 
+
 window.addEventListener('load', function() {
     setPage();
     });
 
 
+let prestamos = [];
 
+fetch("./js/datosPrestamos.json")
+    .then(response => response.json())
+    .then( data => {
+    prestamos = data;
+    setPage(prestamos);
+    })
 
 
 //Creo una funcion donde utilizo DOM. Creo clases de bootstrap. 
