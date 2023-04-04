@@ -9,12 +9,21 @@ window.addEventListener('load', function() {
 
 let prestamos = [];
 
-fetch("./js/datosPrestamos.json")
-    .then(response => response.json())
-    .then( data => {
-    prestamos = data;
-    setPage(prestamos);
+fetch("../datosPrestamos.json")
+    .then((response) => {
+        if (!response.ok) {
+            throw new Error("Error al cargar datosPrestamos.json");
+        }
+        return response.json();
     })
+    .then((data) => {
+        prestamos = data;
+        localStorage.setItem("prestamos", JSON.stringify(prestamos));
+        setPage(prestamos);
+    })
+    .catch((error) => {
+        console.error("Error en la carga de datos:", error);
+    });
 
 
 //Creo una funcion donde utilizo DOM. Creo clases de bootstrap. 
@@ -64,13 +73,21 @@ for(i = 0; i < datosAlmacenados.length; i ++) {
         event.preventDefault();
         let prestamo = datosAlmacenados.find(p => p.id === parseInt(btnPrestamos.getAttribute('id')));
         if((carritoPrestamos.find(c => c.id === prestamo.id) != null)) {
-            alert('Este préstamo ya ha sido seleccionado');
+            Swal.fire({
+                icon: 'error',
+                title: 'Préstamo ya elegido.',
+                text: 'El sistema no habilita a elegir dos veces el mismo plan de préstamo.',      
+            });
         } else {
             if(carritoPrestamos.length < 2) {
                 carritoPrestamos.push(prestamo);
                 recorrerCarrito(carritoPrestamos);
             } else {
-                alert('Como máximo se pueden solicitar dos préstamos');
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Límite superado',
+                    text: 'El sistema no habilita a elegir más de dos planes de dos planes',      
+                })      
             }
             
         }    
@@ -96,3 +113,5 @@ function recorrerCarrito(carritoPrestamos) {
     mostrarTotalDevolucion.textContent = totalMontoDevolucion;
 }
 
+//alert('Este préstamo ya ha sido seleccionado');
+//alert('Como máximo se pueden solicitar dos préstamos');

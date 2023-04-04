@@ -1,20 +1,4 @@
-/*                                      Segunda Pre-entrega. 
-
-    El proyecto final tendrá por objetivo la creación de sitio que ofrezca préstamos a sus clientes.
-
-    En esta segunda pre entrega lo que quiería lograr era que el usuario validara su edad, 
-    y una vez que se confirmara que era mayor de 18 años, pudiera elegir entre una serie de paquetes de prestamos
-    los cuales están ya pre establecidos.
-
-    El arreglo préstamos contiene los paquetes de préstamos en forma de objetos. 
-    Cree una función que itera sobre el arreglo con el método forEach y le muestra al usuario los diferentes planes.
-    Luego cree otra función que es la que ejecuta todo, validando edad, ejecutando la iteracion de eleccion de prestamo, y
-    calculando cual es el valor de la cuota que tiene que devolver el tomador del prestamo para su cancelacion
-
-    Si el usuario completa los datos del formulario HTML automaticamente le permite ingresar nuevamente la edad y elegir prestamo.
-
-
-
+/*                                     
 
 const prestamos = [
   { id: 0, nombre: "Plan 0", capital: 500000,cuotas: 6, interes: 0.10 },
@@ -28,27 +12,19 @@ const prestamos = [
   { id: 8,nombre: "Plan 18",capital: 2000000,cuotas: 24, interes: 0.30 }
 ];
 
-*/
-
-/*
 function solicitarPrestamo(prestamoSeleccionado) {
     let resultado = Math.round(prestamoSeleccionado.capital / prestamoSeleccionado.cuotas + prestamoSeleccionado.capital * prestamoSeleccionado.interes);
     return resultado;
   }
 
 solicitarPrestamo()
-*/ 
+ 
 
-/* Array PRESTAMOS guardo en localStorage */
-
-
-
-
-//localStorage.setItem('prestamos', JSON.stringify(prestamos));
-
+*/
 
 /* Aplico DOM, EVENTOS, LOCALSTORAGE Y JSON  
 Creo un objeto que guarda los datos ingresados por el usuario en el FORMULARIO que está en la página principal */
+
 let formu = document.getElementById('formulario');
 
 document.addEventListener('submit', funcionEnviar);
@@ -76,12 +52,37 @@ function funcionEnviar(event) {
   localStorage.setItem('formulario', JSON.stringify(objetoFormulario))
   let datosAlmacenados = JSON.parse(localStorage.getItem('formulario'));
   
-
+  
   /* Una vez cargados los datos por el usuario, se remueve el formulario */
   document.getElementById('formulario').remove();
   document.getElementById('textoRemove').remove();
   
-  /* Creo dos elementos. Un elemento P y un Button. Le agrego clases. */
+  
+
+  /* Agrego un evento. Una vez que se le da click a "enviar", desaprece el formulario.
+    Aparece un texto y un botón que te lleva a la pagina de prestamos */
+
+    Swal.fire({
+      title: "Felitaciones, has completado el formulario correctamente!",
+      showCancelButton: true,
+      text: "Te interesaría acceder a nuestros planes de préstamos?",
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, quiero conocer los planes de prestamos disponibles',
+      cancelButtonText: 'No por el momento'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: 'Excelente',
+          html: 'Haz click <a href="/prestamos.html">AQUÍ</a> para conocerlos',
+          icon: 'success',
+        })
+        formu.remove();
+      }
+    })
+    
+    /* Creo dos elementos. Un elemento P y un Button. Le agrego clases. */
+
 
   const newBtn = document.createElement('button');
   newBtn.classList.add('btn');
@@ -92,13 +93,12 @@ function funcionEnviar(event) {
   newText.classList.add('text-center');
   newText.classList.add('nuevo-texto');
   newBtn.textContent = 'Ver nuestros préstamos';
-  newText.textContent = 'Bienvenido, a continuación podrás acceder a nuestros planes: ';
+  newText.textContent = 'Para el supuesto de que te interese acceder a nuestros préstamos mas tarde, aquí te dejamos el enlace ';
 
-  /* Agrego un evento. Una vez que se le da click a "enviar", desaprece el formulario.
-    Aparece un texto y un botón que te lleva a la pagina de prestamos */
+
 
   newBtn.addEventListener('click', function handleClick(event) {
-    location.href='paginas/prestamos.html';
+    location.href='/prestamos.html';
   })
   const cajita = document.createElement('div')
   cajita.classList.add('divCajita');
