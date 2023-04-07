@@ -124,3 +124,14 @@ h3 {
 .cajitasPrestamos {
     margin-bottom: 2rem;
 }
+
+/* Estilos tabla Prestamos */
+
+.estilosTabla {
+    font-size: 1.5rem;
+    margin: 2em;
+}
+
+.estiloTh {
+    padding: 1em;
+}

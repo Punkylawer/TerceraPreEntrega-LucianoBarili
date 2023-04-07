@@ -82,15 +82,16 @@ for(i = 0; i < datosAlmacenados.length; i ++) {
             if(carritoPrestamos.length < 2) {
                 carritoPrestamos.push(prestamo);
                 recorrerCarrito(carritoPrestamos);
+                tablaCarritoPrestamos(carritoPrestamos);
             } else {
                 Swal.fire({
                     icon: 'error',
                     title: 'Límite superado',
                     text: 'El sistema no habilita a elegir más de dos planes de dos planes',      
-                })      
-            }
+                });      
+            };
             
-        }    
+        };    
         });
     //Inserto las variables creadas.
     divPlan.appendChild(btnPrestamos);
@@ -100,18 +101,77 @@ for(i = 0; i < datosAlmacenados.length; i ++) {
 
 // Creo la funcion recorrerCarrito. Armo un bucle For para recorrerlo. Hago las operaciones logicas para
 // mostrar en el Carrito/Cotizador el resultado.
-function recorrerCarrito(carritoPrestamos) {
+function recorrerCarrito(carritoPrestamos) {   
         totalMontoPrestamos = 0;
         totalMontoDevolucion = 0;
     for ( i = 0; i < carritoPrestamos.length; i ++) {
             totalMontoPrestamos += carritoPrestamos[i].capital;
             totalMontoDevolucion += (carritoPrestamos[i].capital + carritoPrestamos[i].capital * carritoPrestamos[i].interes);
     }
+    localStorage.setItem('totalMontoDevolucion', totalMontoDevolucion);
     const mostrarTotal = document.getElementById('total');
     mostrarTotal.textContent = totalMontoPrestamos;
     const mostrarTotalDevolucion = document.getElementById('totalDevolucion');
     mostrarTotalDevolucion.textContent = totalMontoDevolucion;
+    
+    
 }
+   
 
-//alert('Este préstamo ya ha sido seleccionado');
-//alert('Como máximo se pueden solicitar dos préstamos');
+function tablaCarritoPrestamos(carritoPrestamos) {
+    const tablaPrestamos = document.getElementById('tablaPrestamos');
+    const tBody = tablaPrestamos.getElementsByTagName('tbody')[0];
+    const prestamos = JSON.parse(localStorage.getItem('prestamos'));
+
+
+    recorrerCarrito(carritoPrestamos);
+    const totalMontoDevolucion = localStorage.getItem('totalMontoDevolucion');
+    
+    // Itera sobre los elementos del carrito de préstamos
+    for (let i = 0; i < carritoPrestamos.length; i++) {
+        const prestamo = carritoPrestamos[i];
+        const tr = document.createElement('tr');
+        
+        // Crea celdas para cada propiedad del objeto préstamo
+        
+        const nombreCelda = document.createElement('td');
+        nombreCelda.textContent = prestamo.nombre;
+        tr.appendChild(nombreCelda);
+        
+        const montoCelda = document.createElement('td');
+        montoCelda.textContent = prestamo.capital;
+        tr.appendChild(montoCelda);
+        
+        const plazoCelda = document.createElement('td');
+        plazoCelda.textContent = prestamo.cuotas;
+        tr.appendChild(plazoCelda);
+        
+        const tasaCelda = document.createElement('td');
+        tasaCelda.textContent = prestamo.interes;
+        tr.appendChild(tasaCelda);
+        
+        const cuotaCelda = document.createElement('td');
+        cuotaCelda.textContent = prestamo.cuota;
+        tr.appendChild(cuotaCelda);
+
+        
+      // Agrega la fila completa a la tabla
+        tBody.appendChild(tr);
+        } 
+        // Crea una celda para el total de devolución
+        const devolucionCelda = document.createElement('td');
+        devolucionCelda.textContent = totalMontoDevolucion;
+        tr.appendChild(devolucionCelda);
+    // Agrega el cuerpo de la tabla a la tabla existente en el HTML
+        tablaPrestamos.appendChild(tBody);
+    }
+  
+    function calculoTotalDevolucionPrestamos(carritoPrestamos) {
+        const contadorTotalDevolucion = 0;
+
+    }
+
+    function calculoValorCuotaPrestamo(carritoPrestamos) {
+        const contadorTotalDevolucion = 0;
+
+    }
