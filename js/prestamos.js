@@ -43,7 +43,59 @@ let totalMontoDevolucion = 0;
 let domCarrito = document.getElementById('carrito');
 let domBtnVaciar = document.getElementById('boton-vaciar'); 
 
+
+// Creo tabla para carrito de préstamos.  
+
+let tabla = document.createElement('table');
+tabla.classList.add('table');
+tabla.classList.add('table-hover');
+tabla.innerHTML = `
+    <thead>
+        <tr>
+            <th>Préstamo</th>
+            <th>Capital</th>
+            <th>Interés</th>
+            <th>Cuotas</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+`;
+domCarrito.appendChild(tabla);
+
+function recorrerCarrito(carritoPrestamos) {   
+    totalMontoPrestamos = 0;
+    totalMontoDevolucion = 0;
+    valorCuotaMensual = 0;
+    let tbody = tabla.querySelector('tbody');
+    tbody.innerHTML = '';
+    for (let i = 0; i < carritoPrestamos.length; i++) {
+        totalMontoPrestamos += carritoPrestamos[i].capital;
+        totalMontoDevolucion += (carritoPrestamos[i].capital + carritoPrestamos[i].capital * carritoPrestamos[i].interes);
+        valorCuotaMensual += Math.round(carritoPrestamos[i].capital / carritoPrestamos[i].cuotas + carritoPrestamos[i].capital * carritoPrestamos[i].interes);carritoPrestamos[i].capital;
+        let fila = document.createElement('tr');
+        fila.innerHTML = `
+            <td>${carritoPrestamos[i].nombre}</td>
+            <td>${carritoPrestamos[i].capital}</td>
+            <td>${carritoPrestamos[i].interes}%</td>
+            <td>${carritoPrestamos[i].cuotas}</td>
+            <td><button class="btn btn-outline-danger btn-sm btn-eliminar" data-id="${carritoPrestamos[i].id}">Eliminar</button></td>
+        `;
+        tbody.appendChild(fila);
+    }
+    localStorage.setItem('totalMontoDevolucion', totalMontoDevolucion);
+    let mostrarTotal = document.getElementById('total');
+    mostrarTotal.textContent = totalMontoPrestamos;
+    let mostrarTotalADevolver = document.getElementById('totalDevolucion');
+    mostrarTotalADevolver.textContent = totalMontoDevolucion;
+    let mostrarValorCuotaMensual = document.getElementById('totalCuotaDevolucion');
+    mostrarValorCuotaMensual.textContent = valorCuotaMensual;
+}
+
+
+
 //Recorro el array con un bucle For y agrego los planes de préstamos en el HTML. 
+
 for(i = 0; i < datosAlmacenados.length; i ++) {
     
     const divPlan = document.createElement('div');
@@ -82,7 +134,9 @@ for(i = 0; i < datosAlmacenados.length; i ++) {
             if(carritoPrestamos.length < 2) {
                 carritoPrestamos.push(prestamo);
                 recorrerCarrito(carritoPrestamos);
-                tablaCarritoPrestamos(carritoPrestamos);
+                
+
+                
             } else {
                 Swal.fire({
                     icon: 'error',
@@ -98,80 +152,3 @@ for(i = 0; i < datosAlmacenados.length; i ++) {
     formu.appendChild(divPlan);
 }
 }
-
-// Creo la funcion recorrerCarrito. Armo un bucle For para recorrerlo. Hago las operaciones logicas para
-// mostrar en el Carrito/Cotizador el resultado.
-function recorrerCarrito(carritoPrestamos) {   
-        totalMontoPrestamos = 0;
-        totalMontoDevolucion = 0;
-    for ( i = 0; i < carritoPrestamos.length; i ++) {
-            totalMontoPrestamos += carritoPrestamos[i].capital;
-            totalMontoDevolucion += (carritoPrestamos[i].capital + carritoPrestamos[i].capital * carritoPrestamos[i].interes);
-    }
-    localStorage.setItem('totalMontoDevolucion', totalMontoDevolucion);
-    const mostrarTotal = document.getElementById('total');
-    mostrarTotal.textContent = totalMontoPrestamos;
-    const mostrarTotalDevolucion = document.getElementById('totalDevolucion');
-    mostrarTotalDevolucion.textContent = totalMontoDevolucion;
-    
-    
-}
-   
-
-function tablaCarritoPrestamos(carritoPrestamos) {
-    const tablaPrestamos = document.getElementById('tablaPrestamos');
-    const tBody = tablaPrestamos.getElementsByTagName('tbody')[0];
-    const prestamos = JSON.parse(localStorage.getItem('prestamos'));
-
-
-    recorrerCarrito(carritoPrestamos);
-    const totalMontoDevolucion = localStorage.getItem('totalMontoDevolucion');
-    
-    // Itera sobre los elementos del carrito de préstamos
-    for (let i = 0; i < carritoPrestamos.length; i++) {
-        const prestamo = carritoPrestamos[i];
-        const tr = document.createElement('tr');
-        
-        // Crea celdas para cada propiedad del objeto préstamo
-        
-        const nombreCelda = document.createElement('td');
-        nombreCelda.textContent = prestamo.nombre;
-        tr.appendChild(nombreCelda);
-        
-        const montoCelda = document.createElement('td');
-        montoCelda.textContent = prestamo.capital;
-        tr.appendChild(montoCelda);
-        
-        const plazoCelda = document.createElement('td');
-        plazoCelda.textContent = prestamo.cuotas;
-        tr.appendChild(plazoCelda);
-        
-        const tasaCelda = document.createElement('td');
-        tasaCelda.textContent = prestamo.interes;
-        tr.appendChild(tasaCelda);
-        
-        const cuotaCelda = document.createElement('td');
-        cuotaCelda.textContent = prestamo.cuota;
-        tr.appendChild(cuotaCelda);
-
-        
-      // Agrega la fila completa a la tabla
-        tBody.appendChild(tr);
-        } 
-        // Crea una celda para el total de devolución
-        const devolucionCelda = document.createElement('td');
-        devolucionCelda.textContent = totalMontoDevolucion;
-        tr.appendChild(devolucionCelda);
-    // Agrega el cuerpo de la tabla a la tabla existente en el HTML
-        tablaPrestamos.appendChild(tBody);
-    }
-  
-    function calculoTotalDevolucionPrestamos(carritoPrestamos) {
-        const contadorTotalDevolucion = 0;
-
-    }
-
-    function calculoValorCuotaPrestamo(carritoPrestamos) {
-        const contadorTotalDevolucion = 0;
-
-    }
