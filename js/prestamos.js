@@ -88,7 +88,10 @@ function recorrerCarrito(carritoPrestamos) {
     for (let i = 0; i < carritoPrestamos.length; i++) {
         totalMontoPrestamos += carritoPrestamos[i].capital;
         totalMontoDevolucion += (carritoPrestamos[i].capital + carritoPrestamos[i].capital * carritoPrestamos[i].interes);
-        valorCuotaMensual += Math.round(carritoPrestamos[i].capital / carritoPrestamos[i].cuotas + carritoPrestamos[i].capital * carritoPrestamos[i].interes / 100 / carritoPrestamos[i].cuotas);
+        if (carritoPrestamos[i].cuotas > valorCuotaMensual) {
+            valorCuotaMensual = carritoPrestamos[i].cuotas;
+        }
+        //valorCuotaMensual += Math.round((carritoPrestamos[i].capital + carritoPrestamos[i].capital * carritoPrestamos[i].interes) / carritoPrestamos[i].cuotas)
         let fila = document.createElement('tr');
         fila.innerHTML = `
             <td>${carritoPrestamos[i].nombre}</td>
@@ -111,7 +114,8 @@ function recorrerCarrito(carritoPrestamos) {
     let mostrarTotalADevolver = document.getElementById('totalDevolucion');
     mostrarTotalADevolver.textContent = totalMontoDevolucion;
     let mostrarValorCuotaMensual = document.getElementById('totalCuotaDevolucion');
-    mostrarValorCuotaMensual.textContent = valorCuotaMensual;
+    mostrarValorCuotaMensual.textContent = Math.round(totalMontoDevolucion / valorCuotaMensual);
+    //mostrarValorCuotaMensual.textContent = valorCuotaMensual;
 }
 
 

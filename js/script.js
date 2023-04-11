@@ -96,9 +96,8 @@ function funcionEnviar(event) {
   newText.textContent = 'Para el supuesto de que te interese acceder a nuestros préstamos mas tarde, aquí te dejamos el enlace ';
 
 
-
   newBtn.addEventListener('click', function handleClick(event) {
-    location.href='/prestamos.html';
+    location.href='./prestamos.html';
   })
   const cajita = document.createElement('div')
   cajita.classList.add('divCajita');
