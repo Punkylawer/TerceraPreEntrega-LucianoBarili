@@ -84,6 +84,21 @@ margin: 20px;
     
 }
 
+.div-carousel {
+    background-color: #1b1b32;
+}
+
+.carousel-item img {
+    height: 450px;
+    width: 100%;
+    object-fit: contain;
+}
+
+.carousel-texto {
+    color:aliceblue ;
+    font-size: 1rem;
+}
+
 /* Sobre mi */
 
 .sobre-mi {
@@ -127,11 +142,34 @@ h3 {
 
 /* Estilos tabla Prestamos */
 
-.estilosTabla {
-    font-size: 1.5rem;
-    margin: 2em;
+
+.estilosPCarrito {
+    font-size: 1.3rem;
+    font-weight: 600;
 }
 
-.estiloTh {
-    padding: 1em;
+
+.hidden {
+    display: none;
+}
+
+.visible {
+    display: block;
+}
+
+
+.aclaraciones {
+    height: 400px;
+}
+
+.prestaH2 {
+    margin-bottom: 2em;
+}
+
+.ulEstilo {
+    line-height: 2rem;
+}
+
+.liEstilo {
+    line-height: 2rem;
 }

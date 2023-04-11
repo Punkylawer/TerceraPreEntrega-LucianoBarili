@@ -26,6 +26,22 @@ fetch("../datosPrestamos.json")
     });
 
 
+    function modalidadesPres() {
+        var loanRequirements = document.querySelectorAll('#loan-requirements li');
+    
+        for (var i = 0; i < loanRequirements.length; i++) {
+            var listItem = loanRequirements[i];
+            listItem.classList.remove('hidden');
+            setTimeout(function(item) {
+                item.classList.add('visible');
+            }, i * 500, listItem);
+        }
+        
+    }
+    
+    modalidadesPres();
+
+
 //Creo una funcion donde utilizo DOM. Creo clases de bootstrap. 
 function setPage() {
 let formu = document.getElementById('div1');
@@ -72,15 +88,21 @@ function recorrerCarrito(carritoPrestamos) {
     for (let i = 0; i < carritoPrestamos.length; i++) {
         totalMontoPrestamos += carritoPrestamos[i].capital;
         totalMontoDevolucion += (carritoPrestamos[i].capital + carritoPrestamos[i].capital * carritoPrestamos[i].interes);
-        valorCuotaMensual += Math.round(carritoPrestamos[i].capital / carritoPrestamos[i].cuotas + carritoPrestamos[i].capital * carritoPrestamos[i].interes);carritoPrestamos[i].capital;
+        valorCuotaMensual += Math.round(carritoPrestamos[i].capital / carritoPrestamos[i].cuotas + carritoPrestamos[i].capital * carritoPrestamos[i].interes / 100 / carritoPrestamos[i].cuotas);
         let fila = document.createElement('tr');
         fila.innerHTML = `
             <td>${carritoPrestamos[i].nombre}</td>
             <td>${carritoPrestamos[i].capital}</td>
             <td>${carritoPrestamos[i].interes}%</td>
             <td>${carritoPrestamos[i].cuotas}</td>
-            <td><button class="btn btn-outline-danger btn-sm btn-eliminar" data-id="${carritoPrestamos[i].id}">Eliminar</button></td>
+            <td><button class="btn btn-outline-danger btn-sm btn-eliminar" data-id="${[i]}">Eliminar</button></td>
         `;
+        let botonEliminar = fila.querySelector('.btn-eliminar');
+        botonEliminar.addEventListener('click', function(){
+            let index = parseInt(this.getAttribute('data-id'));
+            carritoPrestamos.splice(index,1);
+            recorrerCarrito(carritoPrestamos);
+        })
         tbody.appendChild(fila);
     }
     localStorage.setItem('totalMontoDevolucion', totalMontoDevolucion);
@@ -152,3 +174,4 @@ for(i = 0; i < datosAlmacenados.length; i ++) {
     formu.appendChild(divPlan);
 }
 }
+
