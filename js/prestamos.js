@@ -9,7 +9,7 @@ window.addEventListener('load', function() {
 
 let prestamos = [];
 
-fetch("../datosPrestamos.json")
+fetch("./datosPrestamos.json")
     .then((response) => {
         if (!response.ok) {
             throw new Error("Error al cargar datosPrestamos.json");
