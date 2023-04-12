@@ -106,3 +106,27 @@ function funcionEnviar(event) {
   document.getElementById('nuevoID').appendChild(cajita);
 
 }
+
+/* API cotización dolar */
+
+setInterval(function() {
+  $('.cotizaciones-container').animate({marginLeft: '-=200px'}, 1200, 'linear', function() {
+      $(this).append($(this).children().first());
+      $(this).css('margin-left', '0');
+  });
+}, 3000);
+
+fetch('https://api.bluelytics.com.ar/v2/latest')
+.then(response => response.json())
+.then(data => {
+  document.getElementById('dolar-oficial-C').innerHTML = `DÓLAR BNA $${data.oficial.value_buy.toFixed(2)}`;
+document.getElementById('dolar-oficial-V').innerHTML = `DÓLAR BNA $${data.oficial.value_sell.toFixed(2)}`;
+document.getElementById('dolar-blue-C').innerHTML = `DÓLAR BLUE $${data.blue.value_buy.toFixed(2)}`;
+document.getElementById('dolar-blue-V').innerHTML = `DÓLAR BLUE $${data.blue.value_sell.toFixed(2)}`;
+document.getElementById('euro-oficial-C').innerHTML = `EURO BNA $${data.oficial_euro.value_buy.toFixed(2)}`;
+document.getElementById('euro-oficial-V').innerHTML = `EURO BNA $${data.oficial_euro.value_sell.toFixed(2)}`;
+document.getElementById('euro-blue-C').innerHTML = `EURO BLUE $${data.oficial_euro.value_sell.toFixed(2)}`;
+document.getElementById('euro-blue-V').innerHTML = `EURO BLUE $${data.oficial_euro.value_sell.toFixed(2)}`;
+})
+.catch(error => console.log(error));
+
