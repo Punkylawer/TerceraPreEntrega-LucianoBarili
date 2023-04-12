@@ -1,29 +1,7 @@
-/*                                     
 
-const prestamos = [
-  { id: 0, nombre: "Plan 0", capital: 500000,cuotas: 6, interes: 0.10 },
-  { id: 1, nombre: "Plan 1", capital: 500000,cuotas: 12, interes: 0.20},
-  { id: 2, nombre: "Plan 2",capital: 500000,cuotas: 24, interes: 0.30},
-  { id: 3, nombre: "Plan 3",capital: 1000000,cuotas: 6 , interes: 0.10 },
-  { id: 4, nombre: "Plan 4",capital: 1000000,cuotas: 12, interes: 0.20 },
-  { id: 5, nombre: "Plan 5",capital: 1000000,cuotas: 24, interes: 0.30 },
-  { id: 6, nombre: "Plan 6",capital: 2000000,cuotas: 6, interes: 0.10 },
-  { id: 7, nombre: "Plan 7",capital: 2000000,cuotas: 12, interes: 0.20 },
-  { id: 8,nombre: "Plan 18",capital: 2000000,cuotas: 24, interes: 0.30 }
-];
-
-function solicitarPrestamo(prestamoSeleccionado) {
-    let resultado = Math.round(prestamoSeleccionado.capital / prestamoSeleccionado.cuotas + prestamoSeleccionado.capital * prestamoSeleccionado.interes);
-    return resultado;
-  }
-
-solicitarPrestamo()
- 
-
-*/
 
 /* Aplico DOM, EVENTOS, LOCALSTORAGE Y JSON  
-Creo un objeto que guarda los datos ingresados por el usuario en el FORMULARIO que está en la página principal */
+Creo un objeto que guarda los datos ingresados por el usuario en el FORMULARIO que está en la página principal. Esto fue parte de la tercera entrega */
 
 let formu = document.getElementById('formulario');
 
@@ -81,8 +59,7 @@ function funcionEnviar(event) {
       }
     })
     
-    /* Creo dos elementos. Un elemento P y un Button. Le agrego clases. */
-
+  /* Creo dos elementos. Un elemento P y un Button. Le agrego clases. */
 
   const newBtn = document.createElement('button');
   newBtn.classList.add('btn');
@@ -109,6 +86,7 @@ function funcionEnviar(event) {
 
 /* API cotización dolar */
 
+
 setInterval(function() {
   $('.cotizaciones-container').animate({marginLeft: '-=200px'}, 1200, 'linear', function() {
       $(this).append($(this).children().first());
@@ -119,7 +97,7 @@ setInterval(function() {
 fetch('https://api.bluelytics.com.ar/v2/latest')
 .then(response => response.json())
 .then(data => {
-  document.getElementById('dolar-oficial-C').innerHTML = `DÓLAR BNA $${data.oficial.value_buy.toFixed(2)}`;
+document.getElementById('dolar-oficial-C').innerHTML = `DÓLAR BNA $${data.oficial.value_buy.toFixed(2)}`;
 document.getElementById('dolar-oficial-V').innerHTML = `DÓLAR BNA $${data.oficial.value_sell.toFixed(2)}`;
 document.getElementById('dolar-blue-C').innerHTML = `DÓLAR BLUE $${data.blue.value_buy.toFixed(2)}`;
 document.getElementById('dolar-blue-V').innerHTML = `DÓLAR BLUE $${data.blue.value_sell.toFixed(2)}`;

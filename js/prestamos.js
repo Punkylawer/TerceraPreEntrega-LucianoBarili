@@ -1,11 +1,8 @@
 //Segunda pagina. Pagina de prestamos que se habilita luego de llenar el formulario.
 
-
-
 window.addEventListener('load', function() {
     setPage();
     });
-
 
 let prestamos = [];
 
@@ -26,22 +23,6 @@ fetch("./datosPrestamos.json")
     });
 
 
-    function modalidadesPres() {
-        var loanRequirements = document.querySelectorAll('#loan-requirements li');
-    
-        for (var i = 0; i < loanRequirements.length; i++) {
-            var listItem = loanRequirements[i];
-            listItem.classList.remove('hidden');
-            setTimeout(function(item) {
-                item.classList.add('visible');
-            }, i * 500, listItem);
-        }
-        
-    }
-    
-    modalidadesPres();
-
-
 //Creo una funcion donde utilizo DOM. Creo clases de bootstrap. 
 function setPage() {
 let formu = document.getElementById('div1');
@@ -49,7 +30,7 @@ formu.classList.add('container');
 formu.classList.add('row');
 formu.classList.add('justify-content-around');
 
-//También traigo los datos del array préstamos de "script.js" creando una variable a tales fines.
+//También traigo los datos del array préstamos de "script.js" creando una variable a tales fines. Esto era de la 3ra entrega. Ahora uso json.
 let datosAlmacenados = JSON.parse(localStorage.getItem('prestamos'));
 
 //Creo el carrito y las variables que uso en el bucle de la funcion recorrerCarrito.
@@ -79,6 +60,8 @@ tabla.innerHTML = `
 `;
 domCarrito.appendChild(tabla);
 
+
+//Funcion para mostrarle al usuario la plata que va a tener que devolver por los planes elegidos.
 function recorrerCarrito(carritoPrestamos) {   
     totalMontoPrestamos = 0;
     totalMontoDevolucion = 0;
@@ -91,7 +74,6 @@ function recorrerCarrito(carritoPrestamos) {
         if (carritoPrestamos[i].cuotas > valorCuotaMensual) {
             valorCuotaMensual = carritoPrestamos[i].cuotas;
         }
-        //valorCuotaMensual += Math.round((carritoPrestamos[i].capital + carritoPrestamos[i].capital * carritoPrestamos[i].interes) / carritoPrestamos[i].cuotas)
         let fila = document.createElement('tr');
         fila.innerHTML = `
             <td>${carritoPrestamos[i].nombre}</td>
@@ -118,10 +100,7 @@ function recorrerCarrito(carritoPrestamos) {
     //mostrarValorCuotaMensual.textContent = valorCuotaMensual;
 }
 
-
-
 //Recorro el array con un bucle For y agrego los planes de préstamos en el HTML. 
-
 for(i = 0; i < datosAlmacenados.length; i ++) {
     
     const divPlan = document.createElement('div');
