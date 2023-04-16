@@ -4,9 +4,9 @@
 Creo un objeto que guarda los datos ingresados por el usuario en el FORMULARIO que está en la página principal. Esto fue parte de la tercera entrega */
 
 let formu = document.getElementById('formulario');
-
 document.addEventListener('submit', funcionEnviar);
 
+/* Función datos formulario */
 function funcionEnviar(event) {
   event.preventDefault();
   let nombre = document.getElementById('nombre').value;
@@ -24,22 +24,17 @@ function funcionEnviar(event) {
     correo,
     proyecto,
   }
-  
-
   // Almaceno todo en localStorage. Agregar JSON.parse y console.log para verificar stringify y parse
   localStorage.setItem('formulario', JSON.stringify(objetoFormulario))
   let datosAlmacenados = JSON.parse(localStorage.getItem('formulario'));
-  
-  
   /* Una vez cargados los datos por el usuario, se remueve el formulario */
   document.getElementById('formulario').remove();
   document.getElementById('textoRemove').remove();
-  
-  
+  alertaSweet();
+}
 
-  /* Agrego un evento. Una vez que se le da click a "enviar", desaprece el formulario.
-    Aparece un texto y un botón que te lleva a la pagina de prestamos */
-
+  /* Función para mostrar alerta que permita al usuario ir a la pagina de préstamos o seguir en la principal */
+  function alertaSweet() {
     Swal.fire({
       title: "Felitaciones, has completado el formulario correctamente!",
       showCancelButton: true,
@@ -59,8 +54,6 @@ function funcionEnviar(event) {
       }
     })
     
-  /* Creo dos elementos. Un elemento P y un Button. Le agrego clases. */
-
   const newBtn = document.createElement('button');
   newBtn.classList.add('btn');
   newBtn.classList.add('btn-primary');
@@ -71,8 +64,6 @@ function funcionEnviar(event) {
   newText.classList.add('nuevo-texto');
   newBtn.textContent = 'Ver nuestros préstamos';
   newText.textContent = 'Para el supuesto de que te interese acceder a nuestros préstamos mas tarde, aquí te dejamos el enlace ';
-
-
   newBtn.addEventListener('click', function handleClick(event) {
     location.href='./prestamos.html';
   })
@@ -81,30 +72,35 @@ function funcionEnviar(event) {
   cajita.appendChild(newText)
   cajita.appendChild(newBtn);
   document.getElementById('nuevoID').appendChild(cajita);
-
 }
 
-/* API cotización dolar */
 
+/* Función para llamar API */
+function apiDivisas() {
+  fetch('https://api.bluelytics.com.ar/v2/latest')
+  .then(response => response.json())
+  .then(data => {
+  document.getElementById('dolar-oficial-C').innerHTML = `DÓLAR BNA $${data.oficial.value_buy.toFixed(2)}`;
+  document.getElementById('dolar-oficial-V').innerHTML = `DÓLAR BNA $${data.oficial.value_sell.toFixed(2)}`;
+  document.getElementById('dolar-blue-C').innerHTML = `DÓLAR BLUE $${data.blue.value_buy.toFixed(2)}`;
+  document.getElementById('dolar-blue-V').innerHTML = `DÓLAR BLUE $${data.blue.value_sell.toFixed(2)}`;
+  document.getElementById('euro-oficial-C').innerHTML = `EURO BNA $${data.oficial_euro.value_buy.toFixed(2)}`;
+  document.getElementById('euro-oficial-V').innerHTML = `EURO BNA $${data.oficial_euro.value_sell.toFixed(2)}`;
+  document.getElementById('euro-blue-C').innerHTML = `EURO BLUE $${data.oficial_euro.value_sell.toFixed(2)}`;
+  document.getElementById('euro-blue-V').innerHTML = `EURO BLUE $${data.oficial_euro.value_sell.toFixed(2)}`;
+  })
+  .catch(error => console.log(error));
+  }
 
+/* Función para animar API */
+function animacionApi() {
 setInterval(function() {
   $('.cotizaciones-container').animate({marginLeft: '-=200px'}, 1200, 'linear', function() {
       $(this).append($(this).children().first());
       $(this).css('margin-left', '0');
   });
 }, 3000);
+}
 
-fetch('https://api.bluelytics.com.ar/v2/latest')
-.then(response => response.json())
-.then(data => {
-document.getElementById('dolar-oficial-C').innerHTML = `DÓLAR BNA $${data.oficial.value_buy.toFixed(2)}`;
-document.getElementById('dolar-oficial-V').innerHTML = `DÓLAR BNA $${data.oficial.value_sell.toFixed(2)}`;
-document.getElementById('dolar-blue-C').innerHTML = `DÓLAR BLUE $${data.blue.value_buy.toFixed(2)}`;
-document.getElementById('dolar-blue-V').innerHTML = `DÓLAR BLUE $${data.blue.value_sell.toFixed(2)}`;
-document.getElementById('euro-oficial-C').innerHTML = `EURO BNA $${data.oficial_euro.value_buy.toFixed(2)}`;
-document.getElementById('euro-oficial-V').innerHTML = `EURO BNA $${data.oficial_euro.value_sell.toFixed(2)}`;
-document.getElementById('euro-blue-C').innerHTML = `EURO BLUE $${data.oficial_euro.value_sell.toFixed(2)}`;
-document.getElementById('euro-blue-V').innerHTML = `EURO BLUE $${data.oficial_euro.value_sell.toFixed(2)}`;
-})
-.catch(error => console.log(error));
-
+apiDivisas();
+animacionApi(); 
