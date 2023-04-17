@@ -1,8 +1,4 @@
 
-
-/* Aplico DOM, EVENTOS, LOCALSTORAGE Y JSON  
-Creo un objeto que guarda los datos ingresados por el usuario en el FORMULARIO que está en la página principal. Esto fue parte de la tercera entrega */
-
 let formu = document.getElementById('formulario');
 document.addEventListener('submit', funcionEnviar);
 

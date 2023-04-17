@@ -4,12 +4,30 @@ window.addEventListener('load', function() {
     setPage();
     });
 
+// Cargar los datos del localStorage al cargar la página
+window.addEventListener('load', function() {
+    let datosAlmacenados = JSON.parse(localStorage.getItem('formulario'));
+    if (datosAlmacenados) {
+    mostrarBienvenida(datosAlmacenados.nombre);
+    }
+});
+
+/* Función que saluda al usuario utilizando el dato cargado */
+function mostrarBienvenida(nombre) {
+    Swal.fire({
+    icon: 'success',
+    title: 'Bienvenido ' + nombre,
+    text: 'Gracias por completar el formulario',
+    });
+}
+
 /* Variables globales */
 let datosAlmacenados = JSON.parse(localStorage.getItem('prestamos'));
 let prestamos = [];
 let carritoPrestamos = [];
 let totalMontoPrestamos = 0;
 let totalMontoDevolucion = 0;
+let valorCuotaMensual = 0;
 let tabla;
 let formu;
 
