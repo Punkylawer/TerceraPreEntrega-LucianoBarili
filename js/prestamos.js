@@ -23,6 +23,7 @@ function mostrarBienvenida(nombre) {
 
 /* Variables globales */
 let datosAlmacenados = JSON.parse(localStorage.getItem('prestamos'));
+let prestamosElegidos = JSON.parse(localStorage.getItem('prestamosElegidos')) || [];
 let prestamos = [];
 let carritoPrestamos = [];
 let totalMontoPrestamos = 0;
@@ -159,6 +160,8 @@ function recorrerCarrito(carritoPrestamos) {
         botonEliminar.addEventListener('click', function(){
             let index = parseInt(this.getAttribute('data-id'));
             carritoPrestamos.splice(index,1);
+            prestamosElegidos.push(carritoPrestamos);
+            localStorage.setItem('prestamosElegidos', JSON.stringify(prestamosElegidos));
             recorrerCarrito(carritoPrestamos);
         })
         tbody.appendChild(fila);
