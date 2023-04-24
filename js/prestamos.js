@@ -23,9 +23,9 @@ function mostrarBienvenida(nombre) {
 
 /* Variables globales */
 let datosAlmacenados = JSON.parse(localStorage.getItem('prestamos'));
-let prestamosElegidos = JSON.parse(localStorage.getItem('prestamosElegidos')) || [];
+//let prestamosElegidos = JSON.parse(localStorage.getItem('prestamosElegidos')) || [];
 let prestamos = [];
-let carritoPrestamos = [];
+let carritoPrestamos = JSON.parse(localStorage.getItem('prestamosElegidos')) || [];;
 let totalMontoPrestamos = 0;
 let totalMontoDevolucion = 0;
 let valorCuotaMensual = 0;
@@ -57,6 +57,7 @@ function setPage() {
     formu.classList.add('container');
     formu.classList.add('row');
     formu.classList.add('justify-content-around');
+    //datosPrestamosJSon();
     tablaCarrito();
     agregarPlanesAlDom(formu);
 }
@@ -65,7 +66,9 @@ function setPage() {
 /* Función para crear tabla donde mostrar los préstamos elegidos */
 function tablaCarrito() {
     let domCarrito = document.getElementById('carrito');
-    let domBtnVaciar = document.getElementById('boton-vaciar'); 
+    let domBtnVaciar = document.getElementById('boton-vaciar');
+    carritoPrestamos = [];
+    localStorage.setItem('prestamosElegidos', JSON.stringify(carritoPrestamos)); 
     tabla = document.createElement('table');
     tabla.classList.add('table');
     tabla.classList.add('table-hover');
@@ -100,7 +103,6 @@ function agregarPlanesAlDom(formu) {
                 <h3>${datosAlmacenados[i].cuotas} cuotas</h3>
                 <h3>${datosAlmacenados[i].interes} % de interes mensual</h3>  
             `;
-        
         const btnPrestamos = document.createElement('button');
         btnPrestamos.setAttribute('id',i);
         btnPrestamos.setAttribute('marcador', i);
@@ -120,6 +122,8 @@ function agregarPlanesAlDom(formu) {
                 if(carritoPrestamos.length < 2) {
                     carritoPrestamos.push(prestamo);
                     recorrerCarrito(carritoPrestamos);
+                    //prestamosElegidos.push(carritoPrestamos);
+                    localStorage.setItem('prestamosElegidos', JSON.stringify(carritoPrestamos));
                 } else {
                     Swal.fire({
                         icon: 'error',
@@ -156,12 +160,11 @@ function recorrerCarrito(carritoPrestamos) {
             <td>${carritoPrestamos[i].cuotas}</td>
             <td><button class="btn btn-outline-danger btn-sm btn-eliminar" data-id="${[i]}">Eliminar</button></td>
         `;
-        let botonEliminar = fila.querySelector('.btn-eliminar');
-        botonEliminar.addEventListener('click', function(){
+            let botonEliminar = fila.querySelector('.btn-eliminar');
+            botonEliminar.addEventListener('click', function(){
             let index = parseInt(this.getAttribute('data-id'));
             carritoPrestamos.splice(index,1);
-            prestamosElegidos.push(carritoPrestamos);
-            localStorage.setItem('prestamosElegidos', JSON.stringify(prestamosElegidos));
+            localStorage.setItem('prestamosElegidos', JSON.stringify(carritoPrestamos));
             recorrerCarrito(carritoPrestamos);
         })
         tbody.appendChild(fila);
@@ -173,5 +176,9 @@ function recorrerCarrito(carritoPrestamos) {
     let mostrarTotalADevolver = document.getElementById('totalDevolucion');
     mostrarTotalADevolver.textContent = totalMontoDevolucion.toLocaleString("es-AR", options);;
     let mostrarValorCuotaMensual = document.getElementById('totalCuotaDevolucion');
+    if(valorCuotaMensual == 0) {
+        mostrarValorCuotaMensual.textContent = '$ 0,00';
+    } else {
     mostrarValorCuotaMensual.textContent = Math.round(totalMontoDevolucion / valorCuotaMensual).toLocaleString("es-AR", options);
+}
 }
